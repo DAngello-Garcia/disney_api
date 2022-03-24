@@ -1,0 +1,29 @@
+{
+  "name": "disney_api",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000d\u0000i\u0000s\u0000n\u0000e\u0000y\u0000_\u0000a\u0000p\u0000i\u0000\r\u0000 \u0000",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DAngello-Garcia/disney_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DAngello-Garcia/disney_api/issues"
+  },
+  "homepage": "https://github.com/DAngello-Garcia/disney_api#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
