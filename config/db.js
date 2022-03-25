@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 
-const characterModel = require('./models/characters.js')
-const movieModel = require('./models/movies.js')
-const genreModel = require('./models/genre.js')
+const characterModel = require('../models/characters.js')
+const movieModel = require('../models/movies.js')
+const genreModel = require('../models/genre.js')
 
 const sequelize = new Sequelize('bzanngjl', 'bzanngjl', 'Wk1KtapX08b_6ie9TRiYwme6kFM6SlBW', {
     host: 'raja.db.elephantsql.com',

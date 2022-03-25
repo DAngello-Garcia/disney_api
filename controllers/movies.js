@@ -1,5 +1,5 @@
 const express = require('express')
-const Movie = require('../../db.js').Movie
+const Movie = require('../config/db.js').Movie
 
 const router = express.Router()
 

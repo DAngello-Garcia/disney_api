@@ -1,5 +1,5 @@
 const express = require('express')
-const Character = require('../../db.js').Character
+const Character = require('../config/db.js').Character
 
 const router = express.Router()
 

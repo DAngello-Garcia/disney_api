@@ -1,6 +1,6 @@
 const express = require('express')
-const characterApiRouter = require('./api/characters.js')
-const movieApiRouter = require('./api/movies.js')
+const characterApiRouter = require('../controllers/characters.js')
+const movieApiRouter = require('../controllers/movies.js')
 
 const router = express.Router()
 
