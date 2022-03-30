@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('genre', {
+    return sequelize.define('Genre', {
         name: type.STRING,
         image: type.STRING
     })

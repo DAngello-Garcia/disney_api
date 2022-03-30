@@ -1,10 +1,8 @@
 const express = require('express')
-const characterApiRouter = require('../controllers/characters.js')
-const movieApiRouter = require('../controllers/movies.js')
+const apiRouter = require('./api')
 
 const router = express.Router()
 
-router.use('/characters', characterApiRouter)
-router.use('/movies', movieApiRouter)
+router.use('/', apiRouter)
 
 module.exports = router

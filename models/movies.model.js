@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('movie', {
+    return sequelize.define('Movie', {
         title: type.STRING,
         date_created: type.DATE,
         image: type.STRING, // link

@@ -1,11 +1,11 @@
 const express = require('express')
+const apiRoutes = require('./routes/index')
 const bodyParser = require('body-parser')
-const apiRoutes = require('./routes/index.js')
 
 const app = express()
 const PORT = 3000
 
-require('./config/db.js')
+require('./config/db')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({

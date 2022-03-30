@@ -4,7 +4,8 @@
   "description": "��#\u0000 \u0000d\u0000i\u0000s\u0000n\u0000e\u0000y\u0000_\u0000a\u0000p\u0000i\u0000\r\u0000 \u0000",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "npm app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/DAngello-Garcia/disney_api#readme",
   "dependencies": {
+    "body-parser": "^1.19.2",
     "express": "^4.17.3",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",

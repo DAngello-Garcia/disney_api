@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('character', {
+    return sequelize.define('Character', {
         name: type.STRING,
         age: type.INTEGER,
         weight: type.REAL,
