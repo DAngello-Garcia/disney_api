@@ -1,7 +1,6 @@
 const express = require('express')
 const QueryTypes = require('sequelize')
-const { getAllCharacters,
-    getDetailedCharcater,
+const { getCharacter,
     createCharacter,
     updateCharacter,
     deleteCharacter
@@ -9,8 +8,7 @@ const { getAllCharacters,
 
 const router = express.Router()
 
-router.get('/', getAllCharacters)
-router.get('/:name', getDetailedCharcater)
+router.get('/', getCharacter)
 router.post('/', createCharacter)
 router.put('/:characterId', updateCharacter)
 router.delete('/:characterId', deleteCharacter)

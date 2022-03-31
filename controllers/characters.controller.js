@@ -1,28 +1,43 @@
+const QueryTypes = require('sequelize')
 const Character = require('../config/db').Character
+const _ = require('lodash');
 
-const getAllCharacters = async (req, res) => {
-    const character = await Character.findAll({
-        attributes: ['name', 'image']
-    })
-    res.json(character)
-}
-
-// router.get('/:characterId', async (req, res) => {
-//     const character = await Character.findByPk(req.params.characterId)
-//     res.json(character)
-// })
-
-const getDetailedCharcater = async (req, res) => {
-    const characterAge = req.query.age
-    const characterWeight = req.query.weight
-    const characterMovies = req.query.movies
-    console.log('Este es el peso: ', characterWeight)
-    // SELECT * FROM Characters INNER JOIN Movies WHERE name = :name
-    const character = await Character.query('SELECT * FROM Characters name = :name', {
-        replacements: {name: characterAge},
-        type: QueryTypes.SELECT
-    })
-    res.json(character)
+const getCharacter = async (req, res) => {
+    if(_.isEmpty(req.query)) {
+        const character = await Character.findAll({
+            attributes: ['name', 'image']
+        })
+        res.json(character)
+    } else {
+        const query_keys = Object.keys(req.query)
+        const query_values = Object.values(req.query)
+        // query_keys[0] = name & query_keys[1] = age query_keys[2] = MovieId
+        if(query_keys.length == 3) {
+            const character = await Character.findOne({
+                where: {
+                    name: query_values[0],
+                    age: query_values[1],
+                    MovieId: query_values[2]
+                }
+            })
+            res.json(character)
+        } else if(query_keys.length == 2) {
+            const character = await Character.findOne({
+                where: {
+                    name: query_values[0],
+                    age: query_values[1]
+                }
+            })
+            res.json(character)
+        } else {
+            const character = await Character.findOne({
+                where: {
+                    name: query_values[0]
+                }
+            })
+            res.json(character)
+        }
+    }
 }
 
 const createCharacter = async (req, res) => {
@@ -49,8 +64,7 @@ const deleteCharacter = async (req, res) => {
 }
 
 module.exports = {
-    getAllCharacters,
-    getDetailedCharcater,
+    getCharacter,
     createCharacter,
     updateCharacter,
     deleteCharacter
