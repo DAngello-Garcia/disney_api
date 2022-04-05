@@ -1,8 +1,7 @@
-const QueryTypes = require('sequelize')
 const Character = require('../config/db').Character
 const _ = require('lodash');
 
-const getCharacter = async (req, res) => {
+const getCharacters = async (req, res) => {
     if(_.isEmpty(req.query)) {
         const character = await Character.findAll({
             attributes: ['name', 'image']
@@ -11,7 +10,7 @@ const getCharacter = async (req, res) => {
     } else {
         const query_keys = Object.keys(req.query)
         const query_values = Object.values(req.query)
-        // query_keys[0] = name & query_keys[1] = age query_keys[2] = MovieId
+        // query_keys[0] = name query_keys[1] = age query_keys[2] = MovieId
         if(query_keys.length == 3) {
             const character = await Character.findOne({
                 where: {
@@ -40,6 +39,11 @@ const getCharacter = async (req, res) => {
     }
 }
 
+const getDetailedCharacter = async (req, res) => {
+    const character = await Character.findByPk(req.params.characterId)
+    res.json(character)
+}
+
 const createCharacter = async (req, res) => {
     const character = await Character.create(req.body)
     res.json(character)    
@@ -64,7 +68,8 @@ const deleteCharacter = async (req, res) => {
 }
 
 module.exports = {
-    getCharacter,
+    getCharacters,
+    getDetailedCharacter,
     createCharacter,
     updateCharacter,
     deleteCharacter

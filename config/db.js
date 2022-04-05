@@ -1,30 +1,14 @@
 const Sequelize = require('sequelize')
+require('dotenv').config()
 
-const characterModel = require('../models/characters.model')
-const movieModel = require('../models/movies.model')
-const genreModel = require('../models/genre.model')
+const db = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER_NAME,
+    process.env.DB_PASSWORD,
+    {
+        host: process.env.DB_HOST,
+        dialect: 'postgres'
+    }
+)
 
-const sequelize = new Sequelize('logbntgo', 'logbntgo', 'tRnmTF0Io21BeOicqadqQjUCOZxTXbDu', {
-    host: 'ruby.db.elephantsql.com',
-    dialect: 'postgres'
-})
-
-const Character = characterModel(sequelize, Sequelize)
-const Movie = movieModel(sequelize, Sequelize)
-const Genre = genreModel(sequelize, Sequelize)
-
-Genre.hasMany(Movie)
-Movie.belongsTo(Genre)
-Movie.belongsToMany(Character, { through: 'Character_Movies' });
-Character.belongsToMany(Movie, { through: 'Character_Movies' });
-
-sequelize.sync({alter: true})
-    .then(() => {
-        console.log("All models were synchronized successfully.")
-    })
-
-module.exports = {
-    Character,
-    Movie,
-    Genre
-}
+module.exports = db

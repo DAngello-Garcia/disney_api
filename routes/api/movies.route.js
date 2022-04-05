@@ -1,6 +1,7 @@
 const express = require('express')
 const QueryTypes = require('sequelize')
-const { getAllMovies,
+const { getMovies,
+    getDetailedMovie,
     createMovie,
     updateMovie,
     deleteMovie
@@ -8,7 +9,8 @@ const { getAllMovies,
 
 const router = express.Router()
 
-router.get('/', getAllMovies)
+router.get('/', getMovies)
+router.get('/:movieId', getDetailedMovie)
 router.post('/', createMovie)
 router.put('/:movieId', updateMovie)
 router.delete('/:movieId', deleteMovie)

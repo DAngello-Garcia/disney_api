@@ -1,9 +1,26 @@
-module.exports = (sequelize, type) => {
-    return sequelize.define('Character', {
-        name: type.STRING,
-        age: type.INTEGER,
-        weight: type.REAL,
-        history: type.TEXT,
-        image: type.STRING
-    })
-}
+const { DataTypes } = require('sequelize')
+const db = require('../config/db')
+
+const Character = db.define(
+    'Character',
+    {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        age: {
+            type: DataTypes.INTEGER
+        },
+        weigth: {
+            type: DataTypes.DECIMAL
+        },
+        history: {
+            type: DataTypes.TEXT
+        },
+        image: {
+            type: DataTypes.STRING
+        }
+    }
+)
+
+module.exports = Character
