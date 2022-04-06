@@ -14,17 +14,9 @@ configureDB(myDB)
 testData(myDB)
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded(
-    {
-        extended: true
-    }
-))
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
-  })
-
-//app.use('/auth', authRouter)
+app.use('/auth', authRouter)
 app.use('/api', apiRoutes)
 
 app.listen(PORT, () => {

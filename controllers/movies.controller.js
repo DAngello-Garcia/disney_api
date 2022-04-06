@@ -1,6 +1,6 @@
 const { QueryTypes } = require('sequelize');
 const Movie = require('../config/db').Movie
-const _ = require('lodash');
+const _ = require('lodash')
 
 const getMovies = async (req, res) => {
     if(_.isEmpty(req.query)) {

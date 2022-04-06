@@ -11,8 +11,12 @@ const Character = db.define(
         age: {
             type: DataTypes.INTEGER
         },
-        weigth: {
-            type: DataTypes.DECIMAL
+        weight: {
+            type: DataTypes.REAL,
+            validate: {
+                min: 0,
+                max: 999
+            }
         },
         history: {
             type: DataTypes.TEXT

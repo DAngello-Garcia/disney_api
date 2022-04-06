@@ -1,5 +1,6 @@
-const Character = require('../config/db').Character
-const _ = require('lodash');
+const Character = require('../models/characters.model')
+const Movie = require('../models/movies.model')
+const _ = require('lodash')
 
 const getCharacters = async (req, res) => {
     if(_.isEmpty(req.query)) {
@@ -40,7 +41,15 @@ const getCharacters = async (req, res) => {
 }
 
 const getDetailedCharacter = async (req, res) => {
-    const character = await Character.findByPk(req.params.characterId)
+    const character = await Character.findByPk(req.params.characterId, {
+        include: [{
+            model: Movie,
+            required: true,
+            attributes: [
+                'title'
+            ]
+          }]
+    })
     res.json(character)
 }
 

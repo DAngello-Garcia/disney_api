@@ -1,5 +1,4 @@
 const express = require('express')
-const QueryTypes = require('sequelize')
 const { getMovies,
     getDetailedMovie,
     createMovie,

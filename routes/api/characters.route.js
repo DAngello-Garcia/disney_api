@@ -1,5 +1,4 @@
 const express = require('express')
-const QueryTypes = require('sequelize')
 const { getCharacters,
     getDetailedCharacter,
     createCharacter,
