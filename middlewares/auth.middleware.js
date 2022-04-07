@@ -1,12 +1,11 @@
 const jwt = require('jsonwebtoken')
-const _ = require('lodash')
 require('dotenv').config()
 
 async function authMiddleware(req, res, next) {
     const authHeader = req.headers.authorization
-    if (_.isEmpty(authHeader)) {
+    if (!(authHeader)) {
         return res.status(401).json({
-            error: "Unauthorized access"
+            error: "Access unauthorized"
         })
     }
 

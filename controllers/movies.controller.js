@@ -1,52 +1,53 @@
-const { QueryTypes } = require('sequelize');
-const Movie = require('../config/db').Movie
-const _ = require('lodash')
+const Movie = require('../models/movies.model')
+const Character = require('../models/characters.model')
 
 const getMovies = async (req, res) => {
-    if(_.isEmpty(req.query)) {
-        const movie = await Movie.findAll({
-            attributes: ['title', 'image', 'date_created']
-        })
-        res.json(movie)
-    } else {
-        const query_keys = Object.keys(req.query)
-        const query_values = Object.values(req.query)
-        // query_keys[0] = name query_keys[1] = genre query_keys[2] = order
-        if(query_keys.length == 3) {
-            const movie = await Movie.query(
-                "SELECT * FROM Movie ORDER BY date_created = :order",
-                {
-                    replacements: {
-                        order: query_values[2]
-                    },
-                    type: QueryTypes.SELECT
-                })
-            res.json(movie)
-        } else if(query_keys.length == 2) {
-            const movie = await Movie.findOne({
-                where: {
-                    name: query_values[0],
-                    genre: query_values[1]
-                }
-            })
-            res.json(movie)
-        } else {
-            const movie = await Movie.findOne({
-                where: {
-                    name: query_values[0]
-                }
-            })
-            res.json(movie)
+    try {
+        const { title, genre, order } = req.query
+        const query = {}
+        const order_query = []
+    
+        if(title) {
+            query.title = title
         }
+        if(genre) {
+            query.genre = genre
+        }
+        if(order) {
+            if(order === 'ASC') {
+                query.order = ['createdAt', 'ASC']
+            } else {
+                query.order = ['createdAt', 'DESC']
+            }
+        }
+        if(!query) {
+            const movie = await Movie.findAll({
+                attributes: ['title', 'image', 'date_created']
+            })
+            return res.status(200).json(movie)
+        }
+
+        const movie = await Movie.findAll({
+            where: query,
+            order: order_query
+        })
+        return res.status(200).json(movie)
+    } catch(error) {
+        return res.status(400).json({ error: error })
     }
+
 }
 
 const getDetailedMovie = async (req, res) => {
-    const movie = await Movie.findOne({
-        where: {
-            id: req.params.movieId
-        }
+    const movie = await Movie.findByPk(req.params.characterId, {
+        include: [{
+            model: Character,
+            as: "Characters",
+            required: true,
+            attributes: []
+          }]
     })
+    res.status(200).json(movie)
 }
 
 const createMovie = async (req, res) => {
