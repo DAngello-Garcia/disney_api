@@ -5,14 +5,14 @@ const { getCharacters,
     updateCharacter,
     deleteCharacter
 } = require('../../controllers/characters.controller')
-const authMiddleare = require('../../middlewares/auth.middleware')
+const { authMiddleware } = require('../../middlewares/auth.middleware')
 
 const router = express.Router()
 
-router.get('/', authMiddleare, getCharacters)
-router.get('/:characterId', authMiddleare, getDetailedCharacter)
-router.post('/', authMiddleare, createCharacter)
-router.put('/:characterId', authMiddleare, updateCharacter)
-router.delete('/:characterId', authMiddleare, deleteCharacter)
+router.get('/', authMiddleware, getCharacters)
+router.get('/:characterId', authMiddleware, getDetailedCharacter)
+router.post('/', authMiddleware, createCharacter)
+router.put('/:characterId', authMiddleware, updateCharacter)
+router.delete('/:characterId', authMiddleware, deleteCharacter)
 
 module.exports = router

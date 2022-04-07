@@ -38,7 +38,9 @@ const getDetailedCharacter = async (req, res) => {
             model: Movie,
             as: "Movies",
             required: true,
-            attributes: []
+            trough: {
+                attributes: []
+            }
           }]
     })
     res.status(200).json(character)

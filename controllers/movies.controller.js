@@ -14,10 +14,10 @@ const getMovies = async (req, res) => {
             query.genre = genre
         }
         if(order) {
-            if(order === 'ASC') {
-                query.order = ['createdAt', 'ASC']
+            if(order === "ASC") {
+                order_query.push(["createdAt", "ASC"])
             } else {
-                query.order = ['createdAt', 'DESC']
+                order_query.push(["createdAt", "DESC"])
             }
         }
         if(!query) {
@@ -39,12 +39,14 @@ const getMovies = async (req, res) => {
 }
 
 const getDetailedMovie = async (req, res) => {
-    const movie = await Movie.findByPk(req.params.characterId, {
+    const movie = await Movie.findByPk(req.params.movieId, {
         include: [{
             model: Character,
             as: "Characters",
             required: true,
-            attributes: []
+            trough: {
+                attributes: []
+            }
           }]
     })
     res.status(200).json(movie)
